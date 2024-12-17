@@ -1,0 +1,61 @@
+version: "3.9"
+
+networks:
+  mm-network:
+    driver: bridge
+
+services:
+  web:
+    container_name: mm-web
+    image: mm-web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    volumes:
+      - ../mm-web:/app
+    networks:
+      - mm-network
+
+  api:
+    container_name: mm-api
+    image: mm-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - ../mm-api:/app
+    networks:
+      - mm-network
+
+  sdk:
+    container_name: mm-sdk
+    image: mm-sdk
+    build:
+      context: ./sdk
+      dockerfile: Dockerfile
+    volumes:
+      - ../mm-sdk:/app
+    networks:
+      - mm-network
+
+  seed:
+    container_name: mm-seed
+    image: mm-seed
+    build:
+      context: ./seed
+      dockerfile: Dockerfile
+    volumes:
+      - ../mm-seed:/app
+    networks:
+      - mm-network
+
+  test:
+    container_name: mm-test
+    image: mm-test
+    build:
+      context: ./test
+      dockerfile: Dockerfile
+    volumes:
+      - ../mm-test:/app
+    networks:
+      - mm-network
